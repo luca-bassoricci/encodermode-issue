@@ -1,4 +1,4 @@
-# encodermode-issue
+# vertxjson-serialization-hotreload-issue
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 

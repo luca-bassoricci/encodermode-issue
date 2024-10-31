@@ -5,6 +5,7 @@ import java.util.Random;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import io.smallrye.common.annotation.NonBlocking;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -26,13 +27,26 @@ public class TestResource {
         return new StringAndInt(RandomStringUtils.randomAlphanumeric(30), R.nextInt(100));
     }
 
-    @Path("wrapped")
+    @Path("object")
     @GET
     @NonBlocking
     @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject wrapped() {
+    public JsonObject object() {
         return new JsonObject().put("wrapped",
                 _generate());
+    }
+
+    @Path("array")
+    @GET
+    @NonBlocking
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonArray array() {
+        final var array = new JsonArray();
+        for (int i = 0; i < 10; i++)
+        {
+            array.add(_generate());
+        }
+        return array;
     }
 
     @Path("json.codec")
